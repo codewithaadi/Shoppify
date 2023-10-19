@@ -1,12 +1,10 @@
-// import axios from "axios";
-// import { iTodo } from "../redux/models/iTodo";
+import axios from 'axios';
+import { iUser } from '../models/user';
 
-// export const getAllToDoApi = async ()=> await axios.get<iTodo>('http://localhost:7000/todos');
+const URL = 'http://localhost:8000'
 
-// export const deleteToDoApi = async (id:Number)=>await axios.delete(`http://localhost:7000/todos/${id}`);
+export const authenticateSignup = async(data:iUser)=>await axios.post(`${URL}/signup`, data);
 
-// export const createToDoApi = async (todo:string)=> await axios.post('http://localhost:7000/todos',{data:todo});
+export const authenticateLogin = async(data:iUser)=>await axios.post(`${URL}/login`, data);
+   
 
-// export const toggleToDoApi = async (id:Number)=>await axios.get(`http://localhost:7000/todos/${id}`);
-
-// export const updateToDoApi = async (id:Number,content:any)=>await axios.put(`http://localhost:7000/todos/${id}`,{content});
