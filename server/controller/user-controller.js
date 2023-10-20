@@ -26,7 +26,7 @@ export const userLogin = async(req,res)=>{
         if(user){
             return res.status(200).json({data : user});
         }else{
-            return res.status(401).json('Invalid Login');
+            return res.status(500).json('Invalid Login');
         }
     }catch(error){
         res.status(500).json('Error', error.message);

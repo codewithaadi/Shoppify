@@ -4,9 +4,7 @@ import bodyParser from 'body-parser';
 import Router from './routes/route.js';
 import Connection from './database/db.js';
 import DefaultData from './default.js';
-import dotenv from 'dotenv';
 
-dotenv.config();
 
 const app = express();
 const PORT = 8000;

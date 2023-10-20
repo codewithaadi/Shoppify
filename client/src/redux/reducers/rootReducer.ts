@@ -1,10 +1,12 @@
 import {combineReducers} from 'redux';
-// import toDoReducer from './toDoReducer';
-// import tabReducer from './tabReducer';
+import userReducer from './userReducer';
+// import productReducer from './productReducer';
+// import cartReducer from './cartReducer';
 
 const rootReducer = combineReducers({
-    // data: toDoReducer,
-    // currentTab: tabReducer
+    user : userReducer,
+    // product: productReducer,
+    // cart: cartReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

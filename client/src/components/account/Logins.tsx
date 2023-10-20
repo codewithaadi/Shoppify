@@ -1,4 +1,5 @@
 import { FC, useState } from "react";
+import { useDispatch, useSelector} from "react-redux";
 import { Box, Typography } from "@mui/material";
 import {
   Component,
@@ -11,6 +12,9 @@ import {
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FormInputText } from "../form-components/FormInputText";
 import { toast } from "react-toastify";
+
+import { userSignupStart,userLoginStart } from "../../redux/actions/userAction";
+import { RootState } from "../../redux/reducers/rootReducer";
 
 interface IFormInputs {
   name?: string;
@@ -26,13 +30,22 @@ const Logins: FC = () => {
     reset,
   } = useForm<IFormInputs>();
 
+  const dispatch = useDispatch();
+  const {error,isUserLogged} = useSelector((state:RootState)=>state.user);
+  
+
   const formSubmitHandler: SubmitHandler<IFormInputs> = (data: IFormInputs) => {
     if(account==='login'){
-        console.log(data);
-        toast.success('User Succesfully Login');
+        dispatch(userLoginStart(data));
+        if(isUserLogged){
+          toast.success('User Succesfully Login');
+        }else{
+          toast.error(error);
+        }
     }else{
-        console.log(data);
+        dispatch(userSignupStart(data));
         toast.success('User Succesfully Signup');
+        toggleSignup();
     }
   };
   const [account, toggleAccount] = useState("login");
@@ -51,10 +64,10 @@ const Logins: FC = () => {
           {account === "login" ? (
             <Wrapper>
               <FormInputText
-                name="email"
-                label="Enter Email"
+                name="username"
+                label="Enter Username"
                 control={control}
-                rules={{ required: "Email is required" }}
+                rules={{ required: "Username is required" }}
               />
               <FormInputText
                 name="password"
