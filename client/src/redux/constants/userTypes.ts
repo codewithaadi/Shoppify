@@ -1,5 +1,5 @@
 import { actionTypes } from "./actionType";
-import { iUser } from "../../models/user";
+import { iUser } from "../../models/models";
 
 export interface UserState{
     isLoading: boolean;

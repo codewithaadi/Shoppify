@@ -14,6 +14,7 @@ const userReducer = (state = initialState, action: UserActions) => {
         case actionTypes.USER_SIGNUP_START:
             return{
                 ...state,
+                error:null,
                 isLoading: true,
                 isUserLogged: false,
                 userName:"",

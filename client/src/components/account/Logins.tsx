@@ -1,6 +1,6 @@
-import { FC, useState } from "react";
-import { useDispatch, useSelector} from "react-redux";
-import {useNavigate} from 'react-router-dom';
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import {
   Component,
@@ -14,7 +14,10 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { FormInputText } from "../form-components/FormInputText";
 import { toast } from "react-toastify";
 
-import { userSignupStart,userLoginStart } from "../../redux/actions/userAction";
+import {
+  userSignupStart,
+  userLoginStart,
+} from "../../redux/actions/userAction";
 import { RootState } from "../../redux/reducers/rootReducer";
 
 interface IFormInputs {
@@ -24,28 +27,28 @@ interface IFormInputs {
   phone?: string;
 }
 
-const Logins: FC = () => {
-  const {
-    handleSubmit,
-    control,
-    reset,
-  } = useForm<IFormInputs>();
+interface LoginProp {
+  isUserAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Logins = (props: LoginProp) => {
+  const { handleSubmit, control, reset } = useForm<IFormInputs>();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const {error} = useSelector((state:RootState)=>state.user);
-  
+  const { error,userName} = useSelector((state: RootState) => state.user);
 
   const formSubmitHandler: SubmitHandler<IFormInputs> = (data: IFormInputs) => {
     if(account==='login'){
         dispatch(userLoginStart(data));
         if(error){
           toast.error(error);
-        }else{
+          reset();
+        }else if(userName!=''){
           toast.success('User Succesfully Login');
-          navigate('/home');
-     
+          props.isUserAuthenticated(true);
+          navigate('/');
         }
     }else{
         dispatch(userSignupStart(data));
@@ -53,6 +56,7 @@ const Logins: FC = () => {
         toggleSignup();
     }
   };
+
   const [account, toggleAccount] = useState("login");
 
   const toggleSignup = () => {
@@ -65,7 +69,9 @@ const Logins: FC = () => {
       <Box>
         <form onSubmit={handleSubmit(formSubmitHandler)}>
           <Image src={imageURL} alt="loginLogo" />
-          <Typography variant="h4" style={{textAlign:'center'}}>Shoppify</Typography>
+          <Typography variant="h4" style={{ textAlign: "center" }}>
+            Shoppify
+          </Typography>
           {account === "login" ? (
             <Wrapper>
               <FormInputText
@@ -80,10 +86,7 @@ const Logins: FC = () => {
                 control={control}
                 rules={{ required: "Password is required" }}
               />
-              <LoginButton
-                type="submit"
-                variant="contained"
-              >
+              <LoginButton type="submit" variant="contained">
                 Login
               </LoginButton>
 
@@ -94,8 +97,13 @@ const Logins: FC = () => {
             </Wrapper>
           ) : (
             <Wrapper>
-              <FormInputText name="username" label="Enter User Name" control={control}  rules={{ required: "Name is required" }} />
-        
+              <FormInputText
+                name="username"
+                label="Enter User Name"
+                control={control}
+                rules={{ required: "Name is required" }}
+              />
+
               <FormInputText
                 name="email"
                 label="Enter Email"
@@ -109,19 +117,15 @@ const Logins: FC = () => {
                 control={control}
                 rules={{ required: "Password is required" }}
               />
-               
-               <FormInputText
+
+              <FormInputText
                 name="phone"
                 label="Enter Phone"
                 control={control}
                 rules={{ required: "Phone is required" }}
               />
-    
-              <SignupButton
-                type="submit"
-              >
-                Signup
-              </SignupButton>
+
+              <SignupButton type="submit">Signup</SignupButton>
               <Typography style={{ textAlign: "center" }}>OR</Typography>
               <LoginButton variant="contained" onClick={() => toggleSignup()}>
                 Already have an account

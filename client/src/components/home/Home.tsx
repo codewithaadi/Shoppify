@@ -1,5 +1,6 @@
-import { FC } from "react";
-
+import { FC,useEffect } from "react";
+import { useDispatch,useSelector } from "react-redux";
+import { RootState } from "../../redux/reducers/rootReducer";
 //MUI
 import { Box, styled } from "@mui/material";
 
@@ -7,7 +8,8 @@ import { Box, styled } from "@mui/material";
 import Header from "./header/Header";
 import Banner from "./Banner";
 import Top from "./Top";
-// import Slide from "./Slide";
+import { loadProductsStart } from "../../redux/actions/productAction";
+import Slide from "./Slide";
 
 const Component = styled(Box)`
   margin-top: 28px;
@@ -16,15 +18,24 @@ const Component = styled(Box)`
 `;
 
 const Home: FC = () => {
+
+  
+  const {products} = useSelector((state:RootState)=>state.product)
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(loadProductsStart());
+  },[dispatch])
+
   return (
     <>
       <Header />
       <Component>
         <Top />
-        {/* <Slide 
-        // products={products} 
+        <Slide 
+        products={products} 
         title="Products of the Day" 
-        /> */}
+        />
         <Banner />
       </Component>
     </>

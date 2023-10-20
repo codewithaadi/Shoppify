@@ -1,4 +1,4 @@
-import { iUser } from "../../models/user";
+import { iUser } from "../../models/models";
 import { actionTypes } from "../constants/actionType";
 
 import { UserSignupStart,UserSignupSuccess,UserSignupError,ErrorPayload} from "../constants/userTypes";
