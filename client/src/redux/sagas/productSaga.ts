@@ -28,7 +28,7 @@ function* ProductDetailFetchSaga(data:any):Generator{
     try{
         const res:any = yield call(fetchProductDetails,data.payload) 
         if(res.status===200){ 
-            yield put(loadProductDetailSuccess(data.payload));
+            yield put(loadProductDetailSuccess(res.data));
         }
     }catch(error:any){
         yield put(loadProductDetailsError({error:error.response.data}));

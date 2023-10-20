@@ -5,7 +5,6 @@ import { RootState } from "../../redux/reducers/rootReducer";
 import { Box, styled } from "@mui/material";
 
 //Components
-import Header from "./header/Header";
 import Banner from "./Banner";
 import Top from "./Top";
 import { loadProductsStart } from "../../redux/actions/productAction";
@@ -18,7 +17,6 @@ const Component = styled(Box)`
 `;
 
 const Home: FC = () => {
-
   
   const {products} = useSelector((state:RootState)=>state.product)
   const dispatch = useDispatch();
@@ -29,7 +27,6 @@ const Home: FC = () => {
 
   return (
     <>
-      <Header />
       <Component>
         <Top />
         <Slide 

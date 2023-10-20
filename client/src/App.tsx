@@ -7,6 +7,7 @@ import {
   Outlet,
 } from "react-router-dom";
 
+import Header from "./components/home/header/Header";
 import Logins from "./components/account/Logins";
 import Home from "./components/home/Home";
 import DetailView from "./components/detailView/DetailView";
@@ -19,6 +20,7 @@ const PrivateRoute = ({ isAuthenticated}:any) => {
   return isAuthenticated ? 
     <>
       <Outlet />
+      <Header />
     </>
    : (
     <Navigate replace to="/login" />
@@ -26,7 +28,7 @@ const PrivateRoute = ({ isAuthenticated}:any) => {
 };
 
 function App() {
-  const [isAuthenticated, isUserAuthenticated] = useState<boolean>(false);
+  const [isAuthenticated, isUserAuthenticated] = useState<boolean>(true);
 
   return (
     <>

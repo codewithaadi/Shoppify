@@ -6,14 +6,6 @@ const Wrapper = styled(Grid)`
   margin-top: 10px;
   justify-content: space-between;
 `;
-const Image = styled("img")(({ theme }) => ({
-  marginTop: 10,
-  width: "100%",
-  [theme.breakpoints.down("md")]: {
-    objectFit: "cover",
-    height: "120px",
-  },
-}));
 
 const Banner: FC = () => {
   return (
@@ -26,10 +18,6 @@ const Banner: FC = () => {
           </Grid>
         ))}
       </Wrapper>
-      <Image
-        src="https://rukminim1.flixcart.com/flap/3006/433/image/4789bc3aefd54494.jpg?q=50"
-        alt="healthcare"
-      />
     </>
   );
 };

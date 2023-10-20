@@ -12,6 +12,6 @@ import {
 // import MenuIcon from '@mui/icons-material/Menu';
 
 export const StyledHeader = styled(AppBar)`
-  background: #2874f0;
+  background: #FF8080;
   height: 55px;
 `;
