@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
 import { useDispatch, useSelector} from "react-redux";
+import {useNavigate} from 'react-router-dom';
 import { Box, Typography } from "@mui/material";
 import {
   Component,
@@ -31,16 +32,20 @@ const Logins: FC = () => {
   } = useForm<IFormInputs>();
 
   const dispatch = useDispatch();
-  const {error,isUserLogged} = useSelector((state:RootState)=>state.user);
+  const navigate = useNavigate();
+
+  const {error} = useSelector((state:RootState)=>state.user);
   
 
   const formSubmitHandler: SubmitHandler<IFormInputs> = (data: IFormInputs) => {
     if(account==='login'){
         dispatch(userLoginStart(data));
-        if(isUserLogged){
-          toast.success('User Succesfully Login');
-        }else{
+        if(error){
           toast.error(error);
+        }else{
+          toast.success('User Succesfully Login');
+          navigate('/home');
+     
         }
     }else{
         dispatch(userSignupStart(data));

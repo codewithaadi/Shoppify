@@ -4,7 +4,8 @@ import {
     put,
     // takeEvery,
     fork,
-    takeLatest, 
+    // takeLatest,
+    takeEvery, 
 } from 'redux-saga/effects';
 
 import { userSignupError,userSignupSuccess} from '../actions/userAction';
@@ -35,11 +36,11 @@ function* UserLoginSaga(data:any):Generator{
 }
 
 function* onUserSignUp() {
-    yield takeLatest(actionTypes.USER_SIGNUP_START,UserSignupSaga)
+    yield takeEvery(actionTypes.USER_SIGNUP_START,UserSignupSaga)
 }
 
 function* onUserLogin(){
-    yield takeLatest(actionTypes.USER_LOGIN_START,UserLoginSaga)
+    yield takeEvery(actionTypes.USER_LOGIN_START,UserLoginSaga)
 }
 
 export const userSaga = [fork(onUserSignUp),fork(onUserLogin)];
