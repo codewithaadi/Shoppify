@@ -16,6 +16,7 @@ import Profile from "./Profile";
 const Header: FC = () => {
 
   const {user} = useSelector((state:RootState)=>state);
+  const {cartItems}:any = useSelector((state:RootState)=>state.cart);
 
   return (
     <StyledHeader>
@@ -36,7 +37,7 @@ const Header: FC = () => {
             <Profile user={user}/>
             <Container to="/cart">
               <Badge 
-              // badgeContent={cartItems?.length} 
+              badgeContent={cartItems?.length} 
               color="secondary">
                 <ShoppingCartIcon />
               </Badge>

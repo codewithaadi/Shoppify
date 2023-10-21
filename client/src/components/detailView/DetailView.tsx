@@ -28,7 +28,7 @@ const DetailView = () => {
         <Container container>
           <Grid item lg={4} md={4} sm={8} xs={12}>
             <ActionItem 
-            imageURL={productDetails.detailUrl} 
+            productDetails={productDetails} 
             />
           </Grid>
           <RightContainer item lg={8} md={8} sm={8} xs={12}>
