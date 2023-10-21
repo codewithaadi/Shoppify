@@ -16,7 +16,6 @@ import Profile from "./Profile";
 const Header: FC = () => {
 
   const {user} = useSelector((state:RootState)=>state);
-  console.log(user);
 
   return (
     <StyledHeader>

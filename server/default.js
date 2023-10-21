@@ -6,7 +6,7 @@ const DefaultData = async()=>{
         await Product.insertMany(products);
         console.log("Data Imported Successfully");
     }catch(error){
-        console.log("Error while inserting default data", error.message);
+        // console.log("Error while inserting default data", error.message);
     }
 }
 
