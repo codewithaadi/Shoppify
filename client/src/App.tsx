@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,FC } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -7,7 +7,7 @@ import {
   Outlet,
 } from "react-router-dom";
 
-import Header from "./components/home/header/Header";
+import Header from "./components/header/Header";
 import Logins from "./components/account/Logins";
 import Home from "./components/home/Home";
 import DetailView from "./components/detailView/DetailView";
@@ -16,7 +16,11 @@ import Cart from "./components/cart/Cart";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const PrivateRoute = ({ isAuthenticated}:any) => {
+type PrivateRouteProps = {
+  isAuthenticated : boolean;
+}
+
+const PrivateRoute : FC<PrivateRouteProps> = ({ isAuthenticated}) => {
   return isAuthenticated ? 
     <>
       <Outlet />
@@ -28,7 +32,7 @@ const PrivateRoute = ({ isAuthenticated}:any) => {
 };
 
 function App() {
-  const [isAuthenticated, isUserAuthenticated] = useState<boolean>(true);
+  const [isAuthenticated, isUserAuthenticated] = useState<boolean>(false);
 
   return (
     <>

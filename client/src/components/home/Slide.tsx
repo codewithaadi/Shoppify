@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 //Material UI
-import { Box, Typography, styled, Button, Divider } from '@mui/material';
+import { Box, Typography, styled,Divider } from '@mui/material';
 
 //Carousel
 import Carousel from 'react-multi-carousel';
@@ -30,7 +30,8 @@ const Component = styled(Box)`
 `
 const Deal = styled(Box)`
     padding: 15px 20px;
-    display: flex;
+    // display: flex;
+    align-content: center;
 `
 
 const DealText = styled(Typography)`
@@ -38,13 +39,7 @@ const DealText = styled(Typography)`
     font-weight: 600;
     margin-right: 25px;
     line-height: 32px;
-`
-const ViewAllButton = styled(Button)`
-    margin-left: auto;
-    backgorund-color: #2874f0;
-    border-radius: 2px;
-    font-size: 13px;
-    font-weight: 600;
+    text-align:center;
 `
 const Image = styled('img')({
     width: 'auto',
@@ -65,11 +60,10 @@ const Slide = (props:slideProps)  => {
         <Component>
             <Deal>
                 <DealText>{props.title}</DealText>
-                <ViewAllButton variant='contained' color='primary'>View All</ViewAllButton>
             </Deal>
             <Divider />
             <Carousel responsive={responsive} dotListClass="custom-dot-list-style" itemClass="carousel-item-padding-40-px" containerClass="carousel-container" swipeable={false} draggable={false} infinite={true} autoPlay={true} centerMode={true} keyBoardControl={true}
-                autoPlaySpeed={4000}>
+                autoPlaySpeed={2500}>
                 {
                     props.products.map(product => (
                         <Link to={`product/${product.id}`} style={{textDecoration: 'none'}} key={product._id}>
