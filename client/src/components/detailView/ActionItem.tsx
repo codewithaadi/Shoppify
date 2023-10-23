@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { addToCartStart } from "../../redux/actions/cartAction";
 import { iProduct } from "../../models/models";
+import { toast } from "react-toastify";
 
 
 interface ActionItemProps{
@@ -20,6 +21,7 @@ const ActionItem = (props:ActionItemProps) => {
   const addItemToCart = ()=>{
     const payload = {id:props.productDetails.id,quantity:1}
     dispatch(addToCartStart(payload));
+    toast.success("Item Added to Cart Successfully");
     navigate('/cart')
 }
 
@@ -31,7 +33,7 @@ const ActionItem = (props:ActionItemProps) => {
             <StyledButton variant='contained' 
             onClick={()=> addItemToCart()} 
             style={{ marginRight: 10, background: '#ff9f00' }}><ShoppingCartIcon />Add to Cart</StyledButton>
-            <StyledButton variant='contained' style={{ background: '#fb541b' }} 
+            <StyledButton variant='contained' style={{ background: '#fb541b' }} onClick={()=> toast.warn("Feature not Integrated")}
             ><FlashOnIcon />Buy Now</StyledButton>
         </LeftContainer>
   )

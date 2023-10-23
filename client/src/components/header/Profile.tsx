@@ -6,6 +6,7 @@ import { Box, Typography,
     Menu,MenuItem,styled 
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import {toast} from 'react-toastify';
 
 //CSS
 const Component = styled(Menu)`
@@ -39,7 +40,7 @@ const Profile = (props:any) => {
             onClick={handleClick}
             ><Typography style={{ marginTop: 3 , cursor:'pointer'}}>{props.user.userName}</Typography></Box>
             <Component anchorEl={anchorRef.current} open={Boolean(open)} onClose={handleClose}>
-                <MenuItem onClick={()=>{handleClose(); navigate('/login')}}>
+                <MenuItem onClick={()=>{handleClose(); toast.success("You have successfully logged out!"); props.isUserAuthenticated(false); navigate('/login')}}>
                     <PowerSettingsNewIcon color="primary" fontSize='small'/>
                     <Logout>Logout</Logout>
                 </MenuItem>

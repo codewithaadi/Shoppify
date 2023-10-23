@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { useSelector } from "react-redux";
 import Search from "./Search";
 import {
@@ -13,7 +12,11 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { RootState } from "../../redux/reducers/rootReducer";
 import Profile from "./Profile";
 
-const Header: FC = () => {
+interface LoginProp {
+  isUserAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Header = (props:LoginProp) => {
 
   const {user} = useSelector((state:RootState)=>state);
   const {cartItems}:any = useSelector((state:RootState)=>state.cart);
@@ -34,7 +37,7 @@ const Header: FC = () => {
         <Search />
         <CustomButtonWrapper>
           <Wrapper>
-            <Profile user={user}/>
+            <Profile user={user} isUserAuthenticated={props.isUserAuthenticated} />
             <Container to="/cart">
               <Badge 
               badgeContent={cartItems?.length} 

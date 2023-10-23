@@ -20,20 +20,22 @@ type PrivateRouteProps = {
   isAuthenticated : boolean;
 }
 
-const PrivateRoute : FC<PrivateRouteProps> = ({ isAuthenticated}) => {
-  return isAuthenticated ? 
-    <>
-      <Outlet />
-      <Header />
-    </>
-   : (
-    <Navigate replace to="/login" />
-  );
-};
 
 function App() {
   const [isAuthenticated, isUserAuthenticated] = useState<boolean>(false);
 
+  const PrivateRoute : FC<PrivateRouteProps> = ({ isAuthenticated}) => {
+    return isAuthenticated ? 
+      <>
+        <Outlet />
+        <Header isUserAuthenticated={isUserAuthenticated}/>
+      </>
+     : (
+      <Navigate replace to="/login" />
+    );
+  };
+
+  
   return (
     <>
       <BrowserRouter>
@@ -41,7 +43,7 @@ function App() {
         <Routes>
         <Route path={'*'} element={<Navigate to={`/login`} />} />
 
-          <Route path="/login" element={<Logins isUserAuthenticated={isUserAuthenticated} />} />
+          <Route path="/login" element={<Logins isUserAuthenticated={isUserAuthenticated} isAuthenticated={isAuthenticated}/>} />
 
           <Route path="/" element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
             <Route path="/" element={<Home />} />

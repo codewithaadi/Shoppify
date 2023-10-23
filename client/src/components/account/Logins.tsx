@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
@@ -29,6 +29,7 @@ interface IFormInputs {
 
 interface LoginProp {
   isUserAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
+  isAuthenticated:boolean;
 }
 
 const Logins = (props: LoginProp) => {
@@ -37,25 +38,29 @@ const Logins = (props: LoginProp) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { error,userName} = useSelector((state: RootState) => state.user);
+  const { error,userName,isLoading} = useSelector((state: RootState) => state.user);
 
   const formSubmitHandler: SubmitHandler<IFormInputs> = (data: IFormInputs) => {
     if(account==='login'){
+        props.isUserAuthenticated(true);
         dispatch(userLoginStart(data));
-        if(error){
-          toast.error(error);
-          reset();
-        }else if(userName!=''){
-          toast.success('User Succesfully Login');
-          props.isUserAuthenticated(true);
-          navigate('/');
-        }
     }else{
         dispatch(userSignupStart(data));
         toast.success('User Succesfully Signup');
         toggleSignup();
     }
-  };
+  };  
+
+  useEffect(()=>{
+    if(!isLoading && userName!='' && props.isAuthenticated){
+      toast.success('User Succesfully Login');
+      props.isUserAuthenticated(true);
+      navigate('/');
+    }else if(!isLoading && error!=null){
+      toast.error(error);
+      reset();
+    }
+  },[isLoading,error])
 
   const [account, toggleAccount] = useState("login");
 
@@ -63,6 +68,7 @@ const Logins = (props: LoginProp) => {
     reset();
     account === "signup" ? toggleAccount("login") : toggleAccount("signup");
   };
+
 
   return (
     <Component>

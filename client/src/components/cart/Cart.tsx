@@ -8,6 +8,7 @@ import TotalView from './TotalView';
 import { Typography, Grid, Box, styled, Button } from '@mui/material';
 import EmptyCart from './EmptyCart';
 import { RootState } from '../../redux/reducers/rootReducer';
+import { toast } from "react-toastify";
 
 //CSS
 const Container = styled(Grid)(({ theme }) => ({
@@ -61,7 +62,7 @@ export default function Cart() {
               ))
             }
             <ButtonWrapper>
-              <StyledButton>Place Order</StyledButton>
+              <StyledButton onClick={()=> toast.warn("Feature not Integrated")}>Place Order</StyledButton>
             </ButtonWrapper>
           </LeftComponent>
           <Grid item lg={3} md={3} sm={12} xs={12}>

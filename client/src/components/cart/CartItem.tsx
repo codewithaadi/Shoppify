@@ -1,5 +1,6 @@
 import { Typography, Box, styled, Button } from '@mui/material'
 import { useDispatch } from 'react-redux';
+import { toast } from "react-toastify";
 
 //CommonUtils
 import { removeFromCartStart } from '../../redux/actions/cartAction';
@@ -40,6 +41,7 @@ const CartItem = (props:any) => {
 
   const removeItemFromCart = (id:string)=>{
     dispatch(removeFromCartStart(id));
+    toast.success("Item removed from Cart!")
   }
 
   return (
